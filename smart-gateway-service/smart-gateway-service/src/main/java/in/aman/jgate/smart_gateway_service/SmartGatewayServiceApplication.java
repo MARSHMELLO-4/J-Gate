@@ -8,6 +8,8 @@ public class SmartGatewayServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SmartGatewayServiceApplication.class, args);
+
+		System.out.println("Smart-gateway-service started at 8080");
 	}
 
 }

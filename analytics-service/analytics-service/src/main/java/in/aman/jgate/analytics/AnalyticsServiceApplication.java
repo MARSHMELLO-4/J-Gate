@@ -8,6 +8,8 @@ public class AnalyticsServiceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AnalyticsServiceApplication.class, args);
+
+		System.out.println("analytics service started at 8082");
 	}
 
 }
