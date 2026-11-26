@@ -11,4 +11,8 @@ public interface ManagementUserRepository extends JpaRepository<ManagementUser, 
 
     Optional<ManagementUser> findByUsername(String username);
 
+    Optional<ManagementUser> findByOrganizationId(Long organizationId);
+
+    boolean existsByUsername(String username);
+
 }

@@ -3,10 +3,13 @@ package in.aman.jgate.management.controller;
 
 import in.aman.jgate.management.dto.requestDto.OrganizationRequest;
 import in.aman.jgate.management.dto.requestDto.OrganizationStatusRequest;
+import in.aman.jgate.management.dto.requestDto.TenantAdminRequest;
 import in.aman.jgate.management.dto.responseDto.OrganizationResponse;
+import in.aman.jgate.management.dto.responseDto.TenantAdminResponse;
 import in.aman.jgate.management.service.OrganizationService;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -73,5 +76,39 @@ public class PlatformOrganisationController {
     }
 
     //crud operations for tenant admins
+    //posting the tenant admin
+    @PostMapping("/{organizationId}/tenant-admin")
+    public ResponseEntity<TenantAdminResponse> createTenantAdmin(
+            @PathVariable Long organizationId,
+            @Valid @RequestBody TenantAdminRequest tenantAdminRequest
+            ) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(organizationService.createTenantAdmin(organizationId, tenantAdminRequest));
+    }
+
+    @GetMapping("/{organizationId}/tenant-admin")
+    public ResponseEntity<TenantAdminResponse> getTenantAdmin(
+            @PathVariable Long organizationId
+    ) {
+        return ResponseEntity.ok(organizationService.getTenantAdminResponse(organizationId));
+    }
+
+    @PutMapping("/{organizationId}/tenant-admin")
+    public ResponseEntity<TenantAdminResponse> updateTenantAdmin(
+            @PathVariable Long organizationId,
+            @Valid @RequestBody TenantAdminRequest request
+    ){
+        return ResponseEntity.ok(
+                organizationService.updateTenantAdmin(organizationId, request)
+        );
+    }
+
+    @DeleteMapping("/{organizationId}/tenant-admin")
+    public ResponseEntity<Void> deleteTenantAdmin(
+            @PathVariable Long organizationId
+    ) {
+        organizationService.deleteTenantAdmin(organizationId);
+        return ResponseEntity.noContent().build();
+    }
 
 }
